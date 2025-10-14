@@ -332,32 +332,42 @@
     </section>
 
     <!-- CONTACT -->
-    <section id="contact">
-      <p style="color:var(--muted);margin:0 0 12px 0">Phone: <strong>+1 (269) 931-3136</strong></p>
+   <section id="contact" style="padding:80px 20px;text-align:center">
+  <h2 style="font-size:32px;margin-bottom:10px">Book a Photoshoot</h2>
+  <p style="color:var(--muted);margin:0 0 32px 0">
+    Have an upcoming game or event? Let’s capture it! <br>
+    Reach out below — or text me directly.
+  </p>
 
-      <div class="contact-grid">
-        <div>
-          <form id="contactForm" action="javascript:void(0)" onsubmit="submitForm()">
-            <input id="name" type="text" placeholder="Your name" required />
-            <input id="phone" type="tel" placeholder="Your phone number" required />
-            <input id="subject" type="text" placeholder="Event / Team / Date" required />
-            <textarea id="message" rows="6" placeholder="Tell me about the event, location, preferred shots, or any questions..."></textarea>
-            <div style="display:flex;gap:8px;align-items:center">
-              <button type="submit">Send booking request</button>
-              <a class="btn" href="sms:+12699313136">Text me directly</a>
-            </div>
-            <p id="formStatus" style="margin-top:8px;color:var(--muted);font-size:13px"></p>
-          </form>
-        </div>
-        <div style="background:var(--card);padding:16px;border-radius:12px;">
-          <h4 style="margin:0 0 8px 0">Quick Info</h4>
-          <p style="color:var(--muted);margin:0 0 12px 0">Phone: <strong>+1 (269) 931-3136</strong><br>Email: <strong> Finnlkruggel@gmail.com</strong></p>
-          <p style="color:var(--muted);margin:0">Follow me: <a href="https://instagram.com/sh0t_by_fv" style="color:var(--accent);">Instagram</a> • 
-            <small style="color:var(--muted)">I can provide model release forms, high-resolution downloads and print services on request.</small>
-          </div>
-        </div>
-      </div>
-    </section>
+  <form id="contactForm" action="javascript:void(0)" onsubmit="submitForm()" style="max-width:500px;margin:0 auto;text-align:left">
+    <input id="name" type="text" placeholder="Your name" required style="width:100%;margin-bottom:12px;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:16px" />
+    <input id="phone" type="tel" placeholder="Your phone number" required style="width:100%;margin-bottom:12px;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:16px" />
+    <input id="subject" type="text" placeholder="Event / Team / Date" required style="width:100%;margin-bottom:12px;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:16px" />
+    <textarea id="message" rows="6" placeholder="Tell me about the event, location, preferred shots, or any questions..." style="width:100%;margin-bottom:16px;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:16px"></textarea>
+
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center">
+      <button type="submit" style="background:#222;color:#fff;border:none;padding:12px 20px;border-radius:8px;font-size:16px;cursor:pointer">Send booking request</button>
+      <a class="btn" href="sms:+12699313136" style="background:#eee;padding:12px 20px;border-radius:8px;text-decoration:none;color:#000;font-size:16px">Text me</a>
+      <a class="btn" href="tel:+12699313136" style="background:#eee;padding:12px 20px;border-radius:8px;text-decoration:none;color:#000;font-size:16px">Call me</a>
+    </div>
+
+    <p id="formStatus" style="margin-top:12px;color:var(--muted);font-size:14px;text-align:center"></p>
+  </form>
+</section>
+
+<script>
+function submitForm(){
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const subject = encodeURIComponent(document.getElementById('subject').value.trim());
+  const message = encodeURIComponent(document.getElementById('message').value.trim() + "\n\n-- sent from Sh0t_by_FV website");
+  const mailto = `mailto:finnlkruggel@gmail.com?subject=${subject}&body=Name:%20${encodeURIComponent(name)}%0APhone:%20${encodeURIComponent(phone)}%0A%0A${message}`;
+  window.location.href = mailto;
+  const status = document.getElementById('formStatus');
+  status.textContent = "Opening your mail app to finish the booking request. If nothing opens, click 'Text me' or 'Call me'.";
+}
+</script>
+
 
     <footer>
       © <span id="year"></span> Sh0t_by_FV • All photos © Sh0t_by_FV. <br>
@@ -412,6 +422,7 @@
   </script>
 </body>
 </html>
+
 
 
 

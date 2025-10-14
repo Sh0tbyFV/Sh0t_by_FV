@@ -339,7 +339,7 @@
         <div>
           <form id="contactForm" action="javascript:void(0)" onsubmit="submitForm()">
             <input id="name" type="text" placeholder="Your name" required />
-            <input id="phone number" type="phone number" placeholder="phone number" required />
+            <input id="email" type="email" placeholder="email" required />
             <input id="subject" type="text" placeholder="Event / Team / Date" required />
             <textarea id="message" rows="6" placeholder="Tell me about the event, location, preferred shots, or any questions..."></textarea>
             <div style="display:flex;gap:8px;align-items:center">
@@ -403,7 +403,7 @@
       const email = document.getElementById('email').value.trim();
       const subject = encodeURIComponent(document.getElementById('subject').value.trim());
       const message = encodeURIComponent(document.getElementById('message').value.trim() + "\\n\\n-- sent from Sh0t_by_FV website");
-      const mailto = `mailto:you@example.com?subject=${subject}&body=Name:%20${encodeURIComponent(name)}%0AEmail:%20${encodeURIComponent(email)}%0A%0A${message}`;
+      const mailto = `mailto:finnlkruggel@gmail.com?subject=${subject}&body=Name:%20${encodeURIComponent(name)}%0AEmail:%20${encodeURIComponent(email)}%0A%0A${message}`;
       // try opening mail client
       window.location.href = mailto;
       const status = document.getElementById('formStatus');

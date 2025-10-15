@@ -339,21 +339,39 @@
     Reach out below — or text me directly.
   </p>
 
-  <form id="contactForm" action="javascript:void(0)" onsubmit="submitForm()" style="max-width:500px;margin:0 auto;text-align:left">
-    <input id="name" type="text" placeholder="Your name" required style="width:100%;margin-bottom:12px;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:16px" />
-    <input id="phone" type="tel" placeholder="Your phone number" required style="width:100%;margin-bottom:12px;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:16px" />
-    <input id="subject" type="text" placeholder="Event / Team / Date" required style="width:100%;margin-bottom:12px;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:16px" />
-    <textarea id="message" rows="6" placeholder="Tell me about the event, location, preferred shots, or any questions..." style="width:100%;margin-bottom:16px;padding:12px;border-radius:8px;border:1px solid #ccc;font-size:16px"></textarea>
+ <section id="contact">
+  <h3 style="margin:0 0 12px 0">Contact & Booking</h3>
 
-    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center">
-      <button type="submit" style="background:#222;color:#fff;border:none;padding:12px 20px;border-radius:8px;font-size:16px;cursor:pointer">Send booking request</button>
-      <a class="btn" href="sms:+12699313136" style="background:#eee;padding:12px 20px;border-radius:8px;text-decoration:none;color:#000;font-size:16px">Text me</a>
-      <a class="btn" href="tel:+12699313136" style="background:#eee;padding:12px 20px;border-radius:8px;text-decoration:none;color:#000;font-size:16px">Call me</a>
+  <div class="contact-grid">
+    <div>
+      <!-- Replace the link below with your own Formspree endpoint -->
+      <form action="https://tally.so/r/mZpz5a" method="POST">
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="text" name="phone" placeholder="Phone number" required />
+        <input type="text" name="subject" placeholder="Event / Team / Date" required />
+        <textarea name="message" rows="6" placeholder="Tell me about the event, location, preferred shots, or any questions..."></textarea>
+        <button type="submit">Send booking request</button>
+      </form>
+      <p style="margin-top:8px;color:var(--muted);font-size:13px">
+        You’ll get a confirmation email once your request is sent.
+      </p>
     </div>
 
-    <p id="formStatus" style="margin-top:12px;color:var(--muted);font-size:14px;text-align:center"></p>
-  </form>
+    <div style="background:var(--card);padding:16px;border-radius:12px;">
+      <h4 style="margin:0 0 8px 0">Quick Info</h4>
+      <p style="color:var(--muted);margin:0 0 12px 0">
+        Phone: <strong>+1 (269) 931-3136</strong><br>
+        Email: <strong>sh0tbyfv@gmail.com</strong>
+      </p>
+      <p style="color:var(--muted);margin:0">
+        Follow me:
+        <a href="https://instagram.com/sh0t_by_fv" style="color:var(--accent);">Instagram</a><br>
+        <small style="color:var(--muted)">Model release forms, high-resolution downloads, and print services available on request.</small>
+      </p>
+    </div>
+  </div>
 </section>
+
 
 <script>
 function submitForm(){
@@ -422,6 +440,7 @@ function submitForm(){
   </script>
 </body>
 </html>
+
 
 
 

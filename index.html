@@ -330,22 +330,15 @@
         </div>
       </div>
     </section>
-
-    <!-- CONTACT -->
-   <section id="contact" style="padding:80px 20px;text-align:center">
-  <h2 style="font-size:32px;margin-bottom:10px">Book a Photoshoot</h2>
-  <p style="color:var(--muted);margin:0 0 32px 0">
-    Have an upcoming game or event? Let’s capture it! <br>
-    Reach out below — or text me directly.
-  </p>
-
- <section id="contact">
+    
+   <!-- CONTACT & BOOKING -->
+<section id="contact">
   <h3 style="margin:0 0 12px 0">Contact & Booking</h3>
 
   <div class="contact-grid">
     <div>
-      <!-- Replace the link below with your own Formspree endpoint -->
-      <form action="https://tally.so/r/mZpz5a" method="POST">
+      <!-- Booking Form -->
+      <form id="contactForm" action="https://formspree.io/f/xqaywyjd" method="POST">
         <input type="text" name="name" placeholder="Your name" required />
         <input type="text" name="phone" placeholder="Phone number" required />
         <input type="text" name="subject" placeholder="Event / Team / Date" required />
@@ -370,28 +363,69 @@
       </p>
     </div>
   </div>
-</section>
+  
 
+<!-- TOAST CSS (put inside your <style> tag) -->
+<style>
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    display: none;
+    opacity: 0;
+    z-index: 9999;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .toast.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .toast.success { background: #28a745; }
+  .toast.error { background: #dc3545; }
+</style>
 
+<!-- FORM SUBMISSION JS (before </body>) -->
 <script>
-function submitForm(){
-  const name = document.getElementById('name').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const subject = encodeURIComponent(document.getElementById('subject').value.trim());
-  const message = encodeURIComponent(document.getElementById('message').value.trim() + "\n\n-- sent from Sh0t_by_FV website");
-  const mailto = `mailto: sh0tbyfv@gmail.com?subject=${subject}&body=Name:%20${encodeURIComponent(name)}%0APhone:%20${encodeURIComponent(phone)}%0A%0A${message}`;
-  window.location.href = mailto;
-  const status = document.getElementById('formStatus');
-  status.textContent = "Opening your mail app to finish the booking request. If nothing opens, click 'Text me' or 'Call me'.";
-}
+  const form = document.getElementById('contactForm');
+  const toast = document.getElementById('toast');
+
+  function showToast(message, type) {
+    toast.textContent = message;
+    toast.className = `toast show ${type}`;
+    setTimeout(() => { toast.className = 'toast'; }, 4000);
+  }
+
+  form.addEventListener('submit', async function(event) {
+    event.preventDefault(); // stop default form submission
+
+    const formData = new FormData(form);
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        showToast("✅ Thanks! Your booking request has been sent. I’ll reach out soon.", "success");
+        form.reset();
+      } else {
+        showToast("❌ Oops! Something went wrong. Please try again or email me directly.", "error");
+      }
+    } catch (error) {
+      showToast("❌ Network error. Please try again later.", "error");
+    }
+  });
 </script>
 
 
-    <footer>
-      © <span id="year"></span> Sh0t_by_FV • All photos © Sh0t_by_FV. <br>
-      
-    </footer>
-  </div>
 
   <!-- lightbox -->
   <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
@@ -424,22 +458,10 @@ function submitForm(){
       if(e.target === lb) closeLightbox();
     });
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeLightbox(); });
-
-    // fake form submission: uses mailto fallback. Adjust as desired to integrate a backend or Formspree/Netlify forms.
-    function submitForm(){
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const subject = encodeURIComponent(document.getElementById('subject').value.trim());
-      const message = encodeURIComponent(document.getElementById('message').value.trim() + "\\n\\n-- sent from Sh0t_by_FV website");
-      const mailto = `mailto:finnlkruggel@gmail.com?subject=${subject}&body=Name:%20${encodeURIComponent(name)}%0AEmail:%20${encodeURIComponent(email)}%0A%0A${message}`;
-      // try opening mail client
-      window.location.href = mailto;
-      const status = document.getElementById('formStatus');
-      status.textContent = "Opening your mail app to finish the booking request. If nothing opens, click 'Email directly'.";
-    }
   </script>
-</body>
+</body> 
 </html>
+
 
 
 

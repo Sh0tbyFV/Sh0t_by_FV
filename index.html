@@ -7,29 +7,32 @@
   <meta name="description" content="Sh0t_by_FV — Action sports photography. Book sessions, view portfolio, buy prints." />
   <style>
     :root{
-      --accent:#ff3b30;
-      --bg:#0b0b0d;
-      --card:#121214;
-      --muted:#9aa0a6;
-      --glass: rgba(255,255,255,0.04);
+      --accent: #39FF14; /* bright neon green */
+      --bg: #070707;
+      --card: #0f0f10;
+      --muted: #9aa0a6;
+      --glass: rgba(255,255,255,0.03);
       --max-width:1100px;
       --radius:12px;
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
     html,body{height:100%}
+    html { scroll-behavior: smooth; }
     body{
       margin:0;
-      background:linear-gradient(180deg,#050507 0%, #09090a 100%);
-      color:#eeeeee;
+      background:linear-gradient(180deg,#050505 0%, #0a0a0a 100%);
+      color:#eee;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      line-height:1.4;
+      line-height:1.45;
     }
     .container{
       max-width:var(--max-width);
       margin:0 auto;
       padding:32px;
     }
+
+    /* Header */
     header{
       display:flex;
       align-items:center;
@@ -44,21 +47,43 @@
       text-decoration:none;
       color:inherit;
     }
+
+    /* Neon CSS logo box */
     .logo{
-      width:54px;
-      height:54px;
-      border-radius:10px;
-      background:linear-gradient(135deg,var(--accent),#ffd166);
+      width:64px;
+      height:64px;
+      border-radius:12px;
       display:flex;
       align-items:center;
       justify-content:center;
-      font-weight:800;
-      color:#0b0b0b;
-      box-shadow: 0 6px 18px rgba(255,59,48,0.12), inset 0 -3px 6px rgba(0,0,0,0.12);
+      background:linear-gradient(180deg, rgba(57,255,20,0.12), rgba(57,255,20,0.03));
+      box-shadow:
+        0 8px 30px rgba(57,255,20,0.12),
+        0 0 18px rgba(57,255,20,0.06) inset,
+        0 0 40px rgba(57,255,20,0.06);
+      font-weight:900;
+      color:var(--bg);
       font-family: "Segoe UI", Roboto, sans-serif;
       letter-spacing:0.6px;
+      position:relative;
+      text-transform:uppercase;
+      font-size:20px;
     }
-    .brand h1{font-size:18px;margin:0;line-height:1;}
+    /* neon glow text inside logo */
+    .logo span{
+      color:#06110a;
+      text-shadow:
+        0 0 6px rgba(57,255,20,0.8),
+        0 0 14px rgba(57,255,20,0.45);
+      font-weight:900;
+    }
+
+    .brand h1{
+      font-size:18px;
+      margin:0;
+      line-height:1;
+      letter-spacing:0.6px;
+    }
     nav a{
       color:var(--muted);
       text-decoration:none;
@@ -73,7 +98,15 @@
       margin-left:24px;
       font-weight:700;
     }
-    .hero{display:grid;grid-template-columns: 1fr 420px;gap:28px;align-items:center;margin-bottom:36px;}
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:center;
+      margin-bottom:36px;
+    }
     .hero-left h2{font-size:34px;margin:0 0 10px 0;}
     .hero-left p{color:var(--muted);margin:0 0 18px 0;}
     .hero-cta{display:flex;gap:12px}
@@ -87,13 +120,36 @@
       border:1px solid rgba(255,255,255,0.04);
       background:var(--glass);
     }
-    .btn.primary{background:var(--accent);color:var(--bg);}
+    .btn.primary{
+      background:var(--accent);
+      color:var(--bg);
+      text-shadow: 0 0 8px rgba(57,255,20,0.25);
+    }
+
+    /* quick / stats */
     .quick{display:flex;gap:12px;color:var(--muted);margin-top:12px;flex-wrap:wrap;}
-    .stat{background:rgba(255,255,255,0.03);padding:10px 12px;border-radius:10px;font-size:13px;}
-    .gallery{display:grid;grid-template-columns: repeat(3,1fr);gap:12px;margin-bottom:36px;}
-    .photo{position:relative;overflow:hidden;border-radius:10px;cursor:pointer;min-height:160px;background:#111;}
-    .photo img{width:100%;height:100%;object-fit:cover;display:block;transition: transform .6s ease;transform-origin:center;}
-    .photo:hover img{ transform: scale(1.08); }
+    .stat{background:rgba(255,255,255,0.02);padding:10px 12px;border-radius:10px;font-size:13px;}
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap:12px;
+      margin-bottom:36px;
+    }
+    .photo{
+      position:relative;
+      overflow:hidden;
+      border-radius:10px;
+      cursor:pointer;
+      min-height:160px;
+      background:#111;
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+    .photo img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .6s ease; transform-origin:center; }
+    .photo:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.6); }
+    .photo:hover img{ transform: scale(1.06); }
+
     .watermark{
       position:absolute;
       right:8px;
@@ -106,18 +162,19 @@
       font-weight:700;
       backdrop-filter: blur(4px);
       pointer-events:none;
-      mix-blend-mode:normal;
       opacity:0.95;
       letter-spacing:0.6px;
     }
+
+    /* Lightbox */
     .lightbox{
       position:fixed;
       inset:0;
       display:flex;
       align-items:center;
       justify-content:center;
-      background:rgba(3,3,3,0.86);
-      z-index:60;
+      background:rgba(3,3,3,0.9);
+      z-index:1000;
       padding:24px;
       gap:18px;
       opacity:0;
@@ -125,48 +182,49 @@
       transition:opacity .18s ease;
     }
     .lightbox.show{opacity:1;visibility:visible;}
-    .lightbox img{max-width:90vw; max-height:85vh; border-radius:10px; box-shadow: 0 24px 60px rgba(0,0,0,0.6);}
-    .lightbox .close{
-      position:absolute;
-      top:20px; right:20px;
-      background:rgba(255,255,255,0.06);
-      border-radius:10px;padding:10px; cursor:pointer; color:#fff;
-    }
-    section{margin-bottom:36px}
-    .about{display:flex;gap:20px;align-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:18px;border-radius:12px;}
-    .about p{color:var(--muted);margin:0}
-    .about .portrait{width:120px;height:120px;border-radius:10px;overflow:hidden;flex-shrink:0;background:#222;}
-    .contact-grid{display:grid;grid-template-columns: 1fr 320px;gap:18px;}
-    form input, form textarea{
-      width:100%;
-      padding:12px;
-      background:#0b0b0c;border:1px solid rgba(255,255,255,0.04);
-      color:#fff;border-radius:8px;margin-bottom:10px;font-size:14px;
-    }
-    form button{
-      padding:12px 16px;border-radius:10px;border:0;font-weight:700;
-      background:var(--accent);color:var(--bg);cursor:pointer;
-    }
-    footer{
-      color:var(--muted);
-      padding:28px 0 60px 0;
-      text-align:center;
-      font-size:13px;
-    }
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr;}
-      .gallery{grid-template-columns: repeat(2,1fr);}
-      .contact-grid{grid-template-columns: 1fr;}
-    }
-    @media (max-width:560px){
-      .gallery{grid-template-columns: 1fr;}
-      header{gap:12px}
-      .logo{width:44px;height:44px}
-      .brand h1{font-size:16px}
-    }
+    .lightbox img{max-width:92vw; max-height:88vh; border-radius:10px; box-shadow: 0 30px 80px rgba(0,0,0,0.7);}
+    .lightbox .close{position:absolute;top:22px;right:22px;background:rgba(255,255,255,0.04);border-radius:8px;padding:10px;cursor:pointer;color:#fff;}
 
-    /* Toast CSS */
-    .toast {
+    /* About / contact / sections */
+    section{margin-bottom:36px}
+    .about{
+      display:flex;
+      gap:20px;
+      align-items:center;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      padding:18px;
+      border-radius:12px;
+    }
+    .about p {color:var(--muted); margin:0}
+    .about .portrait{width:120px;height:120px;border-radius:10px; overflow:hidden;flex-shrink:0;background:#222;}
+    .contact-grid{display:grid;grid-template-columns: 1fr 320px;gap:18px;}
+    form input, form textarea{width:100%;padding:12px;background:#0b0b0c;border:1px solid rgba(255,255,255,0.04);color:#fff;border-radius:8px;margin-bottom:10px;font-size:14px;}
+    form button{padding:12px 16px;border-radius:10px;border:0;font-weight:700;background:var(--accent);color:var(--bg);cursor:pointer;box-shadow:0 10px 28px rgba(57,255,20,0.06);}
+
+    footer{color:var(--muted);padding:28px 0 60px 0;text-align:center;font-size:13px;}
+
+    /* Floating Book Now */
+    .floating-book{
+      position:fixed;
+      left:20px;
+      bottom:22px;
+      z-index:1200;
+      background:linear-gradient(90deg,var(--accent), #a6ffb2);
+      color:var(--bg);
+      padding:12px 16px;
+      border-radius:12px;
+      font-weight:800;
+      box-shadow:0 18px 40px rgba(0,0,0,0.45);
+      text-decoration:none;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .floating-book:hover{ transform: translateY(-6px); box-shadow:0 28px 60px rgba(0,0,0,0.5); }
+
+    /* Toast */
+    .toast{
       position: fixed;
       bottom: 30px;
       right: 30px;
@@ -179,30 +237,43 @@
       align-items: center;
       opacity: 0;
       pointer-events: none;
-      z-index: 9999;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      z-index: 1300;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.35);
       transform: translateY(20px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transition: opacity 0.35s ease, transform 0.35s ease;
     }
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
+    .toast.show{ opacity:1; transform:translateY(0); pointer-events:auto; }
+    .toast.success{ background: #28a745; }
+    .toast.error{ background: #dc3545; }
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .gallery{grid-template-columns: repeat(2,1fr);}
+      .contact-grid{grid-template-columns:1fr;}
+      .logo{width:54px;height:54px;font-size:18px}
+      .floating-book{left:12px;right:auto;padding:10px 14px}
     }
-    .toast.success { background: #28a745; }
-    .toast.error { background: #dc3545; }
+    @media (max-width:560px){
+      .gallery{grid-template-columns:1fr;}
+      header{gap:12px}
+      .logo{width:48px;height:48px;font-size:16px}
+      .brand h1{font-size:16px}
+      .floating-book{left:12px;bottom:14px}
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <a class="brand" href="#home">
-        <div class="logo">FV</div>
+      <a class="brand" href="#home" aria-label="Sh0t_by_FV Home">
+        <div class="logo" role="img" aria-hidden="true"><span>FV</span></div>
         <div>
           <h1>Sh0t_by_FV</h1>
           <div style="font-size:12px;color:var(--muted)">Sports Photography</div>
         </div>
       </a>
+
       <nav>
         <a href="#portfolio">Portfolio</a>
         <a href="#packages">Packages</a>
@@ -211,7 +282,7 @@
       </nav>
     </header>
 
-    <!-- Hero -->
+    <!-- HERO -->
     <section class="hero" id="home">
       <div class="hero-left">
         <h2>Freeze the moment. Own the action.</h2>
@@ -221,10 +292,11 @@
           <a class="btn" href="#portfolio">View Portfolio</a>
         </div>
         <div class="quick" aria-hidden="true">
-          <div class="stat">⚽️ Sports: Football, Basketball, Soccer, any sport.</div>
+          <div class="stat">⚽️ Football • Basketball • Soccer</div>
           <div class="stat">⏱️ Fast delivery — 48–72 hrs</div>
         </div>
       </div>
+
       <div class="hero-right" style="display:flex;flex-direction:column;gap:10px;">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
           <div style="height:100px;border-radius:10px;overflow:hidden"><img src="IO3A2379.JPG" alt="hero" style="width:100%;height:100%;object-fit:cover"></div>
@@ -234,7 +306,7 @@
       </div>
     </section>
 
-    <!-- Portfolio -->
+    <!-- PORTFOLIO -->
     <section id="portfolio">
       <h3 style="margin:0 0 12px 0">Portfolio</h3>
       <div class="gallery" id="gallery">
@@ -247,7 +319,7 @@
       </div>
     </section>
 
-    <!-- Packages -->
+    <!-- PACKAGES -->
     <section id="packages">
       <h3 style="margin:0 0 12px 0">Packages</h3>
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
@@ -269,21 +341,22 @@
       </div>
     </section>
 
-    <!-- About -->
+    <!-- ABOUT -->
     <section id="about">
       <h3 style="margin:0 0 12px 0">About FV</h3>
       <div class="about">
         <div class="portrait"><img src="IMG_1847.JPG" alt="portrait" style="width:100%;height:100%;object-fit:cover"></div>
         <div>
           <p>I'm Finn (FV), a sports photographer focused on helping athletes look good. I shoot with high end pro gear, edit every image for impact, and prioritize fast deliveries so teams and athletes get their shots while the game is still trending.</p>
-          <p style="margin-top:10px;color:var(--muted)">Available for games, school sports, highlights, editorial work, and team packages. Based in your area — travel available for tournaments(but could effect cost) and out-of-town events.</p>
+          <p style="margin-top:10px;color:var(--muted)">Available for games, school sports, highlights, editorial work, and team packages. Based in your area — travel available for tournaments (may affect cost) and out-of-town events.</p>
         </div>
       </div>
     </section>
 
-    <!-- Contact & Booking -->
+    <!-- CONTACT & BOOKING -->
     <section id="contact">
       <h3 style="margin:0 0 12px 0">Contact & Booking</h3>
+
       <div class="contact-grid">
         <div>
           <form id="contactForm" action="https://formspree.io/f/xqaywyjd" method="POST">
@@ -293,33 +366,32 @@
             <textarea name="message" rows="6" placeholder="Tell me about the event, location, preferred shots, or any questions..."></textarea>
             <button type="submit">Send booking request</button>
           </form>
-          <p style="margin-top:8px;color:var(--muted);font-size:13px">
-            You’ll get a confirmation email once your request is sent.
-          </p>
+          <p style="margin-top:8px;color:var(--muted);font-size:13px">You’ll get a confirmation email once your request is sent.</p>
         </div>
+
         <div style="background:var(--card);padding:16px;border-radius:12px;">
           <h4 style="margin:0 0 8px 0">Quick Info</h4>
-          <p style="color:var(--muted);margin:0 0 12px 0">
-            Phone: <strong>+1 (269) 931-3136</strong><br>
-            Email: <strong>sh0tbyfv@gmail.com</strong>
-          </p>
-          <p style="color:var(--muted);margin:0">
-            Follow me:
-            <a href="https://instagram.com/sh0t_by_fv" style="color:var(--accent);">Instagram</a><br>
-            <small style="color:var(--muted)">Model release forms, high-resolution downloads, and print services available on request.</small>
-          </p>
+          <p style="color:var(--muted);margin:0 0 12px 0">Phone: <strong>+1 (269) 931-3136</strong><br>Email: <strong>sh0tbyfv@gmail.com</strong></p>
+          <p style="color:var(--muted);margin:0">Follow me: <a href="https://instagram.com/sh0t_by_fv" style="color:var(--accent);">Instagram</a><br><small style="color:var(--muted)">Model release forms, high-resolution downloads, and print services available on request.</small></p>
         </div>
       </div>
 
-      <!-- Toast -->
-      <div id="toast" class="toast"></div>
+      <div id="toast" class="toast" aria-live="polite"></div>
     </section>
 
-    <!-- Footer -->
     <footer>
-      &copy; <span id="year"></span> Sh0t_by_FV. All rights reserved.
+      &copy; <span id="year"></span> Sh0t_by_FV • All photos © Sh0t_by_FV.
     </footer>
   </div>
+
+  <!-- Floating Book Now -->
+  <a class="floating-book" href="#contact" aria-label="Book Now">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));">
+      <path d="M12 2v20" stroke="rgba(11,11,13,0.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M5 9h14" stroke="rgba(11,11,13,0.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Book Now
+  </a>
 
   <!-- Lightbox -->
   <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
@@ -329,8 +401,10 @@
 
   <!-- JS -->
   <script>
+    // footer year
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Lightbox
     const photos = document.querySelectorAll('.photo');
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lightboxImg');
@@ -347,18 +421,20 @@
       lb.setAttribute('aria-hidden','true');
       lbImg.src = '';
     }
-    lb.addEventListener('click', (e)=>{ if(e.target===lb) closeLightbox(); });
-    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeLightbox(); });
+    lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeLightbox(); });
 
-    // Booking Form
+    // Toast & Formspree submission (robust)
     const form = document.getElementById('contactForm');
     const toast = document.getElementById('toast');
+
     function showToast(message, type) {
       toast.textContent = message;
       toast.className = `toast show ${type}`;
-      setTimeout(() => { toast.className = 'toast'; }, 4000);
+      setTimeout(() => { toast.className = 'toast'; }, 4200);
     }
-    form.addEventListener('submit', async (e)=>{
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(form);
       try {
@@ -367,21 +443,25 @@
           body: formData,
           headers: { 'Accept': 'application/json' }
         });
-        const result = await res.json();
-        if(result.ok || res.ok){
+        // some Formspree responses are JSON; check both
+        let json = null;
+        try { json = await res.json(); } catch (_) { json = null; }
+        if ((json && json.ok) || res.ok) {
           showToast("✅ Booking sent! I’ll reach out soon.", "success");
           form.reset();
         } else {
           showToast("❌ Something went wrong. Try again or email me.", "error");
         }
-      } catch(err){
-        showToast("❌ Network error. Try again later.", "error");
+      } catch (err) {
         console.error(err);
+        showToast("❌ Network error. Try again later.", "error");
       }
     });
   </script>
 </body>
 </html>
+
+
 
 
 
